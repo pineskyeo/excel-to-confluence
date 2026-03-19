@@ -1,41 +1,41 @@
-# Excel to Confluence Converter
+# Excel to Confluence 변환기
 
-Convert Excel (`.xlsx`) files into Word (`.docx`) documents ready for import into Confluence.
+Excel (`.xlsx`) 파일을 Confluence에 임포트할 수 있는 Word (`.docx`) 문서로 변환합니다.
 
-Supports **tables**, **images**, **merged cells**, and **text** across multiple sheets.
+여러 시트에 걸친 **테이블**, **이미지**, **병합 셀**, **텍스트** 를 모두 지원합니다.
 
 ---
 
-## How It Works
+## 동작 방식
 
 ```
 Excel (.xlsx)
-  └── Sheet 1  ──►  Heading + Text + Tables + Images
-  └── Sheet 2  ──►  Heading + Text + Tables + Images
+  └── Sheet 1  ──►  제목 + 텍스트 + 테이블 + 이미지
+  └── Sheet 2  ──►  제목 + 텍스트 + 테이블 + 이미지
   └── Sheet 3  ──►  ...
                           │
                           ▼
                     output.docx
                           │
                           ▼
-              Confluence Word Import
+              Confluence Word 임포트
 ```
 
-Each sheet becomes a section in the Word document, preserving:
-- Cell text and font styles (bold, italic, color)
-- Table structures including merged cells and background colors
-- Embedded images, anchored in their original row order
+각 시트는 Word 문서의 섹션으로 변환되며 다음 요소를 보존합니다:
+- 셀 텍스트 및 폰트 스타일 (굵기, 기울임, 색상)
+- 병합 셀 및 배경색을 포함한 테이블 구조
+- 원래 행 순서에 맞춰 삽입된 이미지
 
 ---
 
-## Requirements
+## 요구 사항
 
-- Python 3.9+
-- pip packages listed in `requirements.txt`
+- Python 3.9 이상
+- `requirements.txt` 에 명시된 pip 패키지
 
 ---
 
-## Installation
+## 설치
 
 ```bash
 git clone https://github.com/pineskyeo/excel-to-confluence.git
@@ -46,48 +46,48 @@ pip install -r requirements.txt
 
 ---
 
-## Usage
+## 사용법
 
-### 1. Convert your Excel file
+### 1. Excel 파일 변환
 
 ```bash
 python converter.py input.xlsx
 ```
 
-Output file is saved as `input.docx` in the same directory.
+변환된 파일은 동일한 디렉토리에 `input.docx` 로 저장됩니다.
 
-To specify a custom output path:
+출력 경로를 직접 지정하려면:
 
 ```bash
 python converter.py input.xlsx output.docx
 ```
 
-### 2. Import into Confluence
+### 2. Confluence에 임포트
 
-1. Open a Confluence page and click **Edit**
-2. Click the **···** (more options) menu
-3. Select **Import Word Document**
-4. Upload the generated `.docx` file
+1. Confluence 페이지 편집기를 열고 **편집** 클릭
+2. **···** (더 보기) 메뉴 클릭
+3. **Word 문서 임포트** 선택
+4. 생성된 `.docx` 파일 업로드
 
 ---
 
-## Quick Test with Sample File
+## 샘플 파일로 빠르게 테스트
 
-Generate a sample Excel file that includes text, tables, merged cells, and images:
+텍스트, 테이블, 병합 셀, 이미지가 포함된 샘플 Excel 파일을 생성합니다:
 
 ```bash
 python create_sample.py
 ```
 
-This creates `sample.xlsx` with 3 sheets:
+`sample.xlsx` 파일이 생성되며 3개의 시트로 구성됩니다:
 
-| Sheet | Contents |
-|-------|----------|
-| Project Overview | Title text + image + task table |
-| Technical Specs | Merged cell headers + image + 2 tables |
-| Summary | KPI text + image + summary table |
+| 시트 | 내용 |
+|------|------|
+| Project Overview | 제목 텍스트 + 이미지 + 업무 테이블 |
+| Technical Specs | 병합 셀 헤더 + 이미지 + 테이블 2개 |
+| Summary | KPI 텍스트 + 이미지 + 요약 테이블 |
 
-Then convert it:
+이후 변환 실행:
 
 ```bash
 python converter.py sample.xlsx
@@ -95,30 +95,30 @@ python converter.py sample.xlsx
 
 ---
 
-## Project Structure
+## 프로젝트 구조
 
 ```
 excel-to-confluence/
-├── converter.py        # Main converter
-├── create_sample.py    # Sample Excel generator (for testing)
-├── requirements.txt    # Python dependencies
+├── converter.py        # 메인 변환기
+├── create_sample.py    # 테스트용 샘플 Excel 생성기
+├── requirements.txt    # Python 의존성 목록
 └── README.md
 ```
 
 ---
 
-## Supported Excel Elements
+## 지원하는 Excel 요소
 
-| Element | Supported |
-|---------|-----------|
-| Text cells | ✅ |
-| Bold / Italic font | ✅ |
-| Font color | ✅ |
-| Cell background color | ✅ |
-| Tables (named) | ✅ |
-| Tables (auto-detected) | ✅ |
-| Merged cells | ✅ |
-| Embedded images (PNG/JPEG) | ✅ |
-| Multiple sheets | ✅ |
-| Formulas | ✅ (computed value only) |
-| Charts | ❌ (skipped) |
+| 요소 | 지원 여부 |
+|------|-----------|
+| 텍스트 셀 | ✅ |
+| 굵기 / 기울임 폰트 | ✅ |
+| 폰트 색상 | ✅ |
+| 셀 배경색 | ✅ |
+| 테이블 (이름 지정) | ✅ |
+| 테이블 (자동 감지) | ✅ |
+| 병합 셀 | ✅ |
+| 이미지 삽입 (PNG/JPEG) | ✅ |
+| 다중 시트 | ✅ |
+| 수식 | ✅ (계산된 값만 변환) |
+| 차트 | ❌ (변환 제외) |
